@@ -39,30 +39,46 @@ int main(){
     Seq.insert(t7);
     // -------------------------------------------------------
     // Metodo print nos enviara los mensajes de error y exito en las inserciones
-    Seq.print();
+    // Seq.print();
 
     // -------------------------------------------------------
     // Metodo charge_to_disk carga nuestros datos del sequential al file
     Seq.charge_to_disk();
-    cout<<"FInish\n";
+    cout<<"----------------Welcom to your DATABASE-----------------"<<endl;
+    int opciones=0;
+    while(opciones!=3){
+        cout<<"1.Imprimir tabla completa "<<endl;
+        cout<<"2.Obtener registro por indice "<<endl;
+        cout<<"3.Salir "<<endl;
+        cout<<"->Ingrese el numero de la opcion: ";
+        cin>>opciones;
+        cout<<"-----------------------------------------------------------\n";
+        switch (opciones)
+        {
+        case 1:
+            Seq.print_Table();
+            cout<<"-----------------------------------------------------------\n";
+            break;
+        case 2:
+            Seq.print_Table();
+            int index;
+            cout<<"->Ingrese el indice: ";
+            cin>>index;
+            Seq.get_tuple_from_DDBB(index);
+            cout<<"-----------------------------------------------------------\n";
+            break;
+        case 3:
+            
+            break;
+        default:
+            cout<<"Opcion incorrecta\n";
+            cout<<"-----------------------------------------------------------\n";
+            break;
+        }
+    }
     
-    // ifstream file;
-    // file.open("hello.txt");
-    // char first_character;
-    // file>>first_character;
-    
-    
-    // string first_line;
-    // if(first_character=='\0')cout<<"is void\n";
-    // else {
-    //     getline(file,first_line);
-    //     first_line=first_character+first_line;
-    //     cout<<first_line<<"\n";
-    //     cout<<"There's content\n";
-    
-    // }
 
-    // cout<<"Termino\n";
+    
     
     return 0;
 }
