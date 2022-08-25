@@ -1,7 +1,7 @@
 #include<iostream>
 // #include<fstream>
 #include"Over_flow_block.h"
-#include<list>
+// #include<list>
 
 class Seq_file{
     private:
@@ -16,10 +16,54 @@ class Seq_file{
         Seq_file(unsigned int capicity_block){
             
             this->m_capicity_block=capicity_block;
-        }
-        // bool is_db_void(){
+            this->collector.is_db_overflow_void();
+            
 
-        // }
+
+
+        }
+        
+        void is_db_void(){
+            // ------------------This block is to dont rewrite the  file--------------
+//------------------------------------------------------------------------
+            ifstream check_the_block;
+            check_the_block.open("instructor.db");
+            char first_character;
+            check_the_block>>first_character;
+            
+            string iterator_lines;
+            if(first_character!='\0'){
+                
+                // El size del block:
+                getline(check_the_block,iterator_lines);
+                iterator_lines=first_character+iterator_lines;
+
+                this->m_capicity_block=stoi(iterator_lines);
+
+                //This getline is to ignore the line
+                // of columns_name:  
+                // ID TEXT char name[20] char dept_name[20] double salary;
+                getline(check_the_block, iterator_lines);
+
+                // ------------------------------
+                while(!check_the_block.eof()){
+                    getline(check_the_block,iterator_lines);
+                    this->insert(new Record_instructor(iterator_lines));
+                }
+                
+
+                check_the_block.close();
+            }
+            else {
+
+                check_the_block.close();
+                return;
+            }
+            
+            
+//------------------------------------------------------------------------            
+//------------------------------------------------------------------------ 
+        }
         void insert(int position,Record_instructor* t){
             auto it = this->m_seq_file.begin();
             // ++it;
@@ -89,27 +133,6 @@ class Seq_file{
             
             if(this->m_seq_file.empty())return;
 
-
-            // ifstream check_the_block;
-            // check_the_block.open("instructor.db");
-            // char first_character;
-            // check_the_block>>first_character;
-            
-            // string first_line;
-            // if(first_character!='\0'){
-                
-            //     // El size del block:
-            //     getline(file,first_line);
-            //     first_line=first_character+first_line;
-
-
-
-
-            // }
-            // check_the_block.close();
-            
-            
-            
             ofstream file;
             // file.open("E:/BBDD2_Lab/DDBB_blocks/instructor.db");
 
@@ -132,7 +155,10 @@ class Seq_file{
                 
             }
             file.close();
-            if(!this->collector.m_overlow_block.empty())this->collector.charge();
+            if(!this->collector.m_overlow_block.empty()){
+                this->collector.charge();
+
+            }
             
             
         }
