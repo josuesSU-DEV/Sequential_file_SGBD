@@ -111,13 +111,47 @@ class Seq_file{
                 this->m_seq_file.insert(it_2,t);
             }
             else{
-                cout<<"There isn't space in the block\nInserted in the overflow block"<<endl;
+                // cout<<"There isn't space in the block\nInserted in the overflow block"<<endl;
                 
                 this->collector.insert(t);
                 
             }
         }
-        
+
+        void print_Table(){
+            auto it=this->m_seq_file.begin();
+            
+            cout<<(*it)->return_names_columns_record_str_format()<<endl;
+            for(;it!=this->m_seq_file.end();it++){
+                cout<<"(";
+                (*it)->print();
+                cout<<")"<<endl;
+    
+            }
+        }
+
+        void get_tuple_from_DDBB(int index){
+            if(index<0){
+                cout<<"Invalid Index\n";
+                return;
+            }
+            if(this->m_seq_file.empty()){
+                cout<<"Table is void\n";
+                return;
+            }
+            int count=0;
+            auto it=this->m_seq_file.begin();
+            for(;it!=this->m_seq_file.end();it++){
+                
+                if(count==index)break;
+                count++;
+            }
+            cout<<"(";
+            (*it)->print();
+            cout<<")\n";
+        }
+
+
         void print(){
             for( auto it = this->m_seq_file.begin(); it != this->m_seq_file.end(); ++it )
             {
