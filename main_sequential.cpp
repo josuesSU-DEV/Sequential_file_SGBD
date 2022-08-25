@@ -10,6 +10,7 @@ int main(){
     // PARAMETRO:Cantidad de bytes que tendra nuestro file
     // Seq_file Seq(101*6-1);
     Seq_file Seq(101*6);
+    Seq.is_db_void();
     // -------------------------------------------------------
     //------------ Creacion de nuestros registros-------------
 
@@ -21,20 +22,21 @@ int main(){
     Record_instructor *t3=new Record_instructor("31133","Pedro","Matematica",29900);
     Record_instructor *t4=new Record_instructor("76133","Jesus","Comunicaciones",8000);
     Record_instructor *t5=new Record_instructor("76698040","Sergio","Literatura",4000);
-    // Record_instructor *t6=new Record_instructor("12345","Sergio","Literatura",4000);
-
-    cout<<"Bytes per record: "<<t5->size_record()<<endl;
+    Record_instructor *t6=new Record_instructor("7777777","Pedro","Computer",800000);
+     Record_instructor *t7=new Record_instructor("987654321","Julian","Alvarez",600);
+    // cout<<"Bytes per record: "<<t5->size_record()<<endl;
     
     // ----------------------------------------------------------------------
     //--------Insercion de nuestros registros en nuestra estructura----------
     
-    // Seq.insert(t);
-    // Seq.insert(t1);
-    // Seq.insert(t2);
-    // Seq.insert(t3);
-    // Seq.insert(t4);
-    // Seq.insert(t5);
-    // Seq.insert(t6);
+    Seq.insert(t);
+    Seq.insert(t1);
+    Seq.insert(t2);
+    Seq.insert(t3);
+    Seq.insert(t4);
+    Seq.insert(t5);
+    Seq.insert(t6);
+    Seq.insert(t7);
     // -------------------------------------------------------
     // Metodo print nos enviara los mensajes de error y exito en las inserciones
     Seq.print();
@@ -43,5 +45,24 @@ int main(){
     // Metodo charge_to_disk carga nuestros datos del sequential al file
     Seq.charge_to_disk();
     cout<<"FInish\n";
+    
+    // ifstream file;
+    // file.open("hello.txt");
+    // char first_character;
+    // file>>first_character;
+    
+    
+    // string first_line;
+    // if(first_character=='\0')cout<<"is void\n";
+    // else {
+    //     getline(file,first_line);
+    //     first_line=first_character+first_line;
+    //     cout<<first_line<<"\n";
+    //     cout<<"There's content\n";
+    
+    // }
+
+    // cout<<"Termino\n";
+    
     return 0;
 }
